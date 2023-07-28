@@ -5,11 +5,17 @@ const fiveDayEl = $("#fiveDay")
 const searchHistoryEl = $("#searchHistory")
 const submitHandler = function() {
     const element = $(this)
-    const city = element.siblings("input").val()
-    console.log(city)
-    const historyButton = $("<button>")
-    historyButton.text(city)
-    searchHistoryEl.append(historyButton)
+    console.log(element)
+    let city
+    if (element.text()!=="submit"){
+        city=element.text()
+    } else {
+        
+        city = element.siblings("input").val()
+        const historyButton = $("<button>")
+        historyButton.text(city)
+        searchHistoryEl.append(historyButton)
+    }
     let url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
     fetch(url).then(function(data){
         return data.json()
@@ -26,6 +32,7 @@ const currentWeather = function(lat, lon) {
         return data.json()
     })
     .then(function(data){
+        currentWeatherEl.empty()
         console.log(data)
         const city = $("<p>")
         city.text(data.name)
@@ -50,6 +57,7 @@ const fiveDayWeather = function(lat, lon) {
         return data.json()
     })
     .then(function(data){
+        fiveDayEl.empty()
         console.log(data)
         for(let i=0; i<data.list.length; i += 8) {
             let day = data.list[i]
@@ -66,10 +74,10 @@ const fiveDayWeather = function(lat, lon) {
         humidity.text(`Humidity: ${day.main.humidity}`)
         const windSpeed = $("<p>")
         windSpeed.text(`windSpeed: ${day.wind.speed}`)
-        currentWeatherEl.append(city, temp, date, icon, humidity, windSpeed)
+        fiveDayEl.append(city, temp, date, icon, humidity, windSpeed)
         }
     })
 }
 
 submitButtonEl.on("click", submitHandler)
-searchHistoryEl.on("click", submitHandler)
+searchHistoryEl.on("click", "button", submitHandler)
