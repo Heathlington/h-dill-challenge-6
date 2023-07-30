@@ -12,7 +12,9 @@ I WANT to see the weather outlook for multiple cities
 SO THAT I can plan a trip accordingly
 ```
 ## URL's
+[github](https://github.com/Heathlington/h-dill-challenge-6)
 
+[live site](https://heathlington.github.io/h-dill-challenge-6/)
 
 ## Respource and Assistance Credit
 
