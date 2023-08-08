@@ -16,7 +16,7 @@ const submitHandler = function() {
         historyButton.text(city)
         searchHistoryEl.append(historyButton)
     }
-    let url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
+    let url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
     fetch(url).then(function(data){
         return data.json()
     })
